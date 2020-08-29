@@ -13,11 +13,11 @@ let connection: Connection;
 describe('Transaction', () => {
   beforeAll(async () => {
     connection = await createConnection('test-connection');
-    
+
     await connection.query('DROP TABLE IF EXISTS transactions');
     await connection.query('DROP TABLE IF EXISTS categories');
     await connection.query('DROP TABLE IF EXISTS migrations');
-    
+
     await connection.runMigrations();
   });
 
@@ -219,7 +219,7 @@ describe('Transaction', () => {
       ]),
     );
 
-    expect(transactions).toHaveLength(3);
+    expect(transactions).toHaveLength(2);
     expect(transactions).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

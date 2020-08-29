@@ -24,6 +24,10 @@ class ImportTransactionsService {
 
     const fileLines = file.trim().split('\n');
 
+    // await fileLines.shift();
+
+    // console.log(fileLines);
+
     const readedTransactions = fileLines.map((row, index) => {
       if (index > 0) {
         const [title, type, value, category] = row.split(',');
@@ -39,16 +43,13 @@ class ImportTransactionsService {
         };
         return transaction;
       }
-      return null;
     });
 
     const transactions: Transaction[] = [];
 
     for (const transaction of readedTransactions) {
-      if (transaction !== null) {
-        const createdTransaction = await createTransaction.execute(transaction);
-        transactions.push(createdTransaction);
-      }
+      const createdTransaction = await createTransaction.execute(transaction);
+      transactions.push(createdTransaction);
     }
 
     return transactions;
